@@ -1,5 +1,4 @@
 class MovableObject {
-    x = 120;
     y = 250;
     img;
     height = 150;
@@ -15,6 +14,6 @@ class MovableObject {
     }
 
     moveLeft() {
-        
+        console.log('Moving left')
     }
 }
