@@ -7,6 +7,9 @@ class MovableObject {
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
+        this.img.onload = () => {
+            console.log(`Bild geladen: ${path}`)
+        }
     }
 
     moveRight() {
