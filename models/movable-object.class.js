@@ -6,15 +6,13 @@ class MovableObject {
     width = 100;
     imageCache = {};
     currentImage = 0;
+    speed =  0.15;
 
 
     // loadImage('img/test.png')
     loadImage(path) {
         this.img = new Image();  // this.img = document.getElementById('image') <img ig="image" src>
         this.img.src = path;
-        /*         this.img.onload = () => {
-                    console.log(`Bild geladen: ${path}`)
-                } */
     }
 
     /**
@@ -34,6 +32,8 @@ class MovableObject {
     }
 
     moveLeft() {
-        console.log('Moving left')
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60)
     }
 }
