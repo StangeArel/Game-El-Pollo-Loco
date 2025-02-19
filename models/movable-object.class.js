@@ -15,11 +15,15 @@ class MovableObject {
                 } */
     }
 
+    /**
+     * 
+     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.imageCache.push(img);
+            this.imageCache[path] = path;
         });
     }
 
