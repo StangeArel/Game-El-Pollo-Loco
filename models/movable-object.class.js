@@ -10,9 +10,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;  // wie schnell runter fehlt
     acceleration = 2.5;  // wie es sich beschleunigt
-
-
-
+    energy = 100;
 
     applyGravity() {
         setInterval(() => {
