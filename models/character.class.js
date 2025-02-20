@@ -47,6 +47,12 @@ class Character extends MovableObject {
                 this.otherDirection = true;
             }
 
+            // console.log('this.speedY', this.speedY);
+
+            if (this.world.keyboard.SPACE) {
+                this.speedY = 20;
+            }
+
             this.world.camera_x = -this.x + 100;
 
         }, 1000 / 60);
