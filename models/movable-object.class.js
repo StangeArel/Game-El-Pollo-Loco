@@ -1,11 +1,5 @@
-class MovableObject {
-    x = 120;
-    y = 280;
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
+    // das alles hier NUR für bewegbare Objekte
     speed = 0.15;
     otherDirection = false;
     speedY = 0;  // wie schnell runter fehlt
@@ -24,16 +18,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 180;
-    }
-
-    // loadImage('img/test.png')
-    loadImage(path) {
-        this.img = new Image();  // this.img = document.getElementById('image') <img ig="image" src>
-        this.img.src = path;
-    }
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
     drawFrame(ctx) {
@@ -71,18 +55,6 @@ class MovableObject {
 
     isDead() {
         return this.energy == 0;
-    }
-
-    /**
-     * 
-     * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
     playAnimation(images) {
