@@ -29,7 +29,7 @@ document.addEventListener("keydown", (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
-    console.log(e);
+//    console.log(e);
 });
 
 

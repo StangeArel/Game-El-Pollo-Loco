@@ -42,6 +42,9 @@ class Character extends MovableObject {
 
     world;
 
+    maxAvailableBottles = 10;
+    currentAvailableBottles = this.maxAvailableBottles;
+
     constructor() {
         super().loadImage('../img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -93,5 +96,22 @@ class Character extends MovableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    throwBottle() {
+        if (this.currentAvailableBottles > 0) {
+            let bottle = new ThrowableObject(this.x + 100, this.y + 100);
+            this.world.throwableObjects.push(bottle);
+
+            this.currentAvailableBottles = Math.max(this.currentAvailableBottles - 1, 0);
+
+            let bottlePercentage = this.getAvailableBottlePercentage();
+            this.world.statusBarSecondary.setPercentage(bottlePercentage);
+        }
+    }
+
+    getAvailableBottlePercentage() {
+//        console.log(this.currentAvailableBottles);
+        return Math.min(this.currentAvailableBottles / this.maxAvailableBottles * 100.0, 100)
     }
 }

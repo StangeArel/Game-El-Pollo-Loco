@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBarSecondary = new StatusBarSecondary();
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -26,8 +27,7 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.SPACE) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bottle);
+            this.character.throwBottle();
         }
     }
 
@@ -47,11 +47,12 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObject);
+        this.addObjectsToMap(this.level.backgroundObjects);
 
         // Space for fixed object
         this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarSecondary);
         this.ctx.translate(this.camera_x, 0); // Forwards 
 
 
