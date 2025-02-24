@@ -33,11 +33,23 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             };
+
+            this.throwableObjects.forEach((bottle) => {
+                if (bottle.isColliding(enemy)) {
+                    enemy.hit();
+                }
+            })
+
+            if (enemy.isDead()) {
+                setTimeout(() => {enemy.deleteMe = true}, 750);
+            }
         });
+
+        this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
     }
 
     setWorld() {
@@ -81,8 +93,8 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-
+/*         mo.drawFrame(this.ctx);
+ */
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
