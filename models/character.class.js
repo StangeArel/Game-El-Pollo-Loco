@@ -92,6 +92,12 @@ class Character extends MovableObject {
                 }
             }
         }, 50);
+
+        setInterval(() => {
+            this.currentAvailableBottles = Math.min(this.currentAvailableBottles + 1, this.maxAvailableBottles);
+            let bottlePercentage = this.getAvailableBottlePercentage();
+            this.world.statusBarSecondary.setPercentage(bottlePercentage);
+        }, 10000);
     }
 
     jump() {
