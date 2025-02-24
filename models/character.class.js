@@ -100,7 +100,7 @@ class Character extends MovableObject {
 
     throwBottle() {
         if (this.currentAvailableBottles > 0) {
-            let bottle = new ThrowableObject(this.x + 100, this.y + 100);
+            let bottle = new ThrowableObject(this.x + 50, this.y + 100, this.otherDirection);
             this.world.throwableObjects.push(bottle);
 
             this.currentAvailableBottles = Math.max(this.currentAvailableBottles - 1, 0);

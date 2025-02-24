@@ -41,6 +41,7 @@ class World {
             this.throwableObjects.forEach((bottle) => {
                 if (bottle.isColliding(enemy)) {
                     enemy.hit();
+                    bottle.deleteMe = true;
                 }
             })
 
@@ -50,6 +51,7 @@ class World {
         });
 
         this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
+        this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.deleteMe);
     }
 
     setWorld() {
