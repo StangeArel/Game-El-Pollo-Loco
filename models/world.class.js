@@ -39,14 +39,17 @@ class World {
             };
 
             this.throwableObjects.forEach((bottle) => {
-                if (bottle.isColliding(enemy)) {
+                if (enemy.isColliding(bottle) && !bottle.destroyed) {
                     enemy.hit();
-                    bottle.deleteMe = true;
+                    bottle.destroy();
+                }
+                if (!bottle.isAboveGround()) {
+                    bottle.destroy();
                 }
             })
 
             if (enemy.isDead()) {
-                setTimeout(() => {enemy.deleteMe = true}, 750);
+                setTimeout(() => {enemy.deleteMe = true}, 1500);
             }
         });
 

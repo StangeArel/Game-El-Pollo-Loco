@@ -107,7 +107,6 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            console.log(this.longIdle);
             if (this.isDead()) {
                 this.playAnimationOnce(this.IMAGES_DEAD);
                 this.longIdle = false;
@@ -148,6 +147,7 @@ class Character extends MovableObject {
 
     throwBottle() {
         if (this.currentAvailableBottles > 0) {
+            this.longIdle = false;
             let bottle = new ThrowableObject(this.x + 50, this.y + 100, this.otherDirection);
             this.world.throwableObjects.push(bottle);
 
