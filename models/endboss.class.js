@@ -2,7 +2,8 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 55;
-    energy = 30;
+    maxEnergy = 30;
+    energy = this.maxEnergy;
     speed = 5;
 
     statuses = {
@@ -68,9 +69,13 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-    hit() {
+    hit(statusBar) {
         super.hit();
         this.setStatus('hurt');
+
+        if (statusBar) {
+            statusBar.setPercentage(this.energy / this.maxEnergy * 100);
+        }
     }
 
     animate() {

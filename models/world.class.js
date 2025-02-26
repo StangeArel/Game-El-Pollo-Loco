@@ -37,6 +37,7 @@ class World {
 
         if (this.character.isAtLevelEnd() && endboss && !this.endBossStarted) {
             this.endBossStarted = true;
+            this.statusBarEndboss = new StatusBarEndboss();
 
             setTimeout(() => {endboss.moveLeftAttackRight()}, 2000);
         }
@@ -57,7 +58,7 @@ class World {
 
             this.throwableObjects.forEach((bottle) => {
                 if (enemy.isColliding(bottle) && !bottle.destroyed) {
-                    enemy.hit();
+                    enemy.hit(this.statusBarEndboss);
                     bottle.destroy();
                 }
                 if (!bottle.isAboveGround()) {
@@ -66,7 +67,12 @@ class World {
             })
 
             if (enemy.isDead() && !this.deadTimer) {
-                this.deadTimer = setTimeout(() => {enemy.deleteMe = true}, 1500);
+                this.deadTimer = setTimeout(() => {
+                    enemy.deleteMe = true;
+                    if (this.statusBarEndboss) {
+                        this.statusBarEndboss = null;
+                    }
+                }, 1500);
             }
         });
 
@@ -87,6 +93,9 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarSecondary);
+        if (this.statusBarEndboss) {
+            this.addToMap(this.statusBarEndboss);
+        }
         this.ctx.translate(this.camera_x, 0); // Forwards 
 
 
