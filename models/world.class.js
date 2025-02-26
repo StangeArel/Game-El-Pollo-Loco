@@ -35,7 +35,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                this.statusBar.setPercentage(this.character.energy / this.character.maxEnergy * 100);
             };
 
             this.throwableObjects.forEach((bottle) => {
@@ -48,8 +48,8 @@ class World {
                 }
             })
 
-            if (enemy.isDead()) {
-                setTimeout(() => {enemy.deleteMe = true}, 1500);
+            if (enemy.isDead() && !this.deadTimer) {
+                this.deadTimer = setTimeout(() => {enemy.deleteMe = true}, 1500);
             }
         });
 

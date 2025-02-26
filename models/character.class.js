@@ -3,6 +3,10 @@ class Character extends MovableObject {
     height = 250;
     y = 50;
     speed = 10;
+
+    maxEnergy = 1000;
+    energy = this.maxEnergy;
+    
     IMAGES_WALKING = [
         '../img/2_character_pepe/2_walk/W-21.png',
         '../img/2_character_pepe/2_walk/W-22.png',
@@ -100,13 +104,14 @@ class Character extends MovableObject {
                 /* this.walking_sound.play(); */
             }
 
-            if (this.world.keyboard.LEFT && this.x > 0 && this.isAtLevelEndTrap()) {
-                this.moveLeft();
-                /* this.walking_sound.play(); */
-                this.otherDirection = true;
+            if (this.world.keyboard.LEFT) {
+                if ((this.x > 0 && !this.levelEndReached) || this.isAtLevelEndTrap()) {
+                    this.moveLeft();
+                    /* this.walking_sound.play(); */
+                    this.otherDirection = true;
+                }
             }
 
-            // console.log('this.speedY', this.speedY);
             if (this.world.keyboard.UP && !this.isAboveGround()) {
                 this.jump();
             }
