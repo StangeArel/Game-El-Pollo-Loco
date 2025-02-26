@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
         movingLeft : 0,
         movingRight : 0,
         attacking : 0,
-        alerting : 0,
+        alerting : 1,
         hurt : 0,
         dead : 0
     }
@@ -98,8 +98,6 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 200);
-
-        this.moveLeftAttackRight();
     }
 
     setStatus(status) {

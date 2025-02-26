@@ -22,7 +22,24 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkEndboss();    
         }, 200);
+    }
+
+    checkEndboss() {
+        let endboss;
+
+        this.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Endboss) {
+                endboss = enemy;
+            }
+        })
+
+        if (this.character.isAtLevelEnd() && endboss && !this.endBossStarted) {
+            this.endBossStarted = true;
+
+            setTimeout(() => {endboss.moveLeftAttackRight()}, 2000);
+        }
     }
 
     checkThrowObjects() {
