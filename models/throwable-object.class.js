@@ -29,6 +29,11 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+    setCollisionBox() {
+        this.collisionBox.width = 80;
+        this.collisionBox.height = 80;
+    }
+
     stop() {
         this.speedX = 0;
         this.speedY = 0;
