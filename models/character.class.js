@@ -4,7 +4,7 @@ class Character extends MovableObject {
     y = 50;
     speed = 10;
 
-    maxEnergy = 1000;
+    maxEnergy = 100;
     energy = this.maxEnergy;
     
     IMAGES_WALKING = [
@@ -167,6 +167,11 @@ class Character extends MovableObject {
         if (item instanceof Bottle) {
             this.currentAvailableBottles = Math.min(this.currentAvailableBottles + 1, this.maxAvailableBottles);
             this.world.statusBarSecondary.setPercentage(this.currentAvailableBottles / this.maxAvailableBottles * 100);
+        }
+
+        if (item instanceof Coin) {
+            this.energy = Math.min(this.energy + 5, this.maxEnergy);
+            this.world.statusBar.setPercentage(this.energy / this.maxEnergy * 100);
         }
 
         item.deleteMe = true;

@@ -72,8 +72,8 @@ class World {
                 }
             })
 
-            if (enemy.isDead() && !this.deadTimer) {
-                this.deadTimer = setTimeout(() => {
+            if (enemy.isDead() && !enemy.deadTimer) {
+                enemy.deadTimer = setTimeout(() => {
                     enemy.deleteMe = true;
                     if (this.statusBarEndboss) {
                         this.statusBarEndboss = null;

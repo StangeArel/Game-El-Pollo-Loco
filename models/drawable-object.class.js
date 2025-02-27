@@ -25,7 +25,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Item) {
+        if (this instanceof MovableObject) {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'blue';
@@ -49,7 +49,7 @@ class DrawableObject {
     isColliding(mo) {
         return this.x + this.collisionBox.width > mo.x &&
             this.y+(this.height-this.collisionBox.height) + this.collisionBox.height > mo.y+(mo.height-mo.collisionBox.height) &&
-            this.x < mo.x &&
+            this.x < mo.x + mo.collisionBox.width &&
             this.y+(this.height-this.collisionBox.height) < mo.y+(mo.height-mo.collisionBox.height) + mo.collisionBox.height;
     }
 
