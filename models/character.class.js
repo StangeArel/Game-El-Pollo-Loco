@@ -151,16 +151,19 @@ class Character extends MovableObject {
                 }
             }    
         }, 70);
-
-        setInterval(() => {
-            this.currentAvailableBottles = Math.min(this.currentAvailableBottles + 1, this.maxAvailableBottles);
-            let bottlePercentage = this.getAvailableBottlePercentage();
-            this.world.statusBarSecondary.setPercentage(bottlePercentage);
-        }, 10000);
     }
 
     jump() {
         this.speedY = 30;
+    }
+
+    pickUp(item) {
+        if (item instanceof Bottle) {
+            this.currentAvailableBottles = Math.min(this.currentAvailableBottles + 1, this.maxAvailableBottles);
+            this.world.statusBarSecondary.setPercentage(this.currentAvailableBottles / this.maxAvailableBottles * 100);
+        }
+
+        item.deleteMe = true;
     }
 
     throwBottle() {

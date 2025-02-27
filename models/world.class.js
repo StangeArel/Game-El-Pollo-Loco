@@ -50,6 +50,12 @@ class World {
     }
 
     checkCollisions() {
+        this.level.items.forEach((item) => {
+            if (this.character.isColliding(item)) {
+                this.character.pickUp(item);
+            }
+        });
+
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
@@ -78,6 +84,7 @@ class World {
 
         this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
         this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.deleteMe);
+        this.level.items = this.level.items.filter((item) => !item.deleteMe);
     }
 
     setWorld() {
@@ -88,6 +95,7 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
 
         // Space for fixed object
         this.ctx.translate(-this.camera_x, 0); // Back
@@ -100,9 +108,10 @@ class World {
 
 
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
+
+        this.addObjectsToMap(this.level.items);
 
         this.ctx.translate(-this.camera_x, 0);
 
