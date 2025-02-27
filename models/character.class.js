@@ -84,7 +84,13 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.applyGravity(); // Gravitation
+        this.setCollisionBox();
         this.animate();
+    }
+
+    setCollisionBox() {
+        this.collisionBox.width = 80;
+        this.collisionBox.height = 150;
     }
 
     isAtLevelEnd() {

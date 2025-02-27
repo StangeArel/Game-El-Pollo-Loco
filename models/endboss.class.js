@@ -66,6 +66,7 @@ class Endboss extends MovableObject {
         this.x = 2400;
         this.maxLeft = 2000;
         this.maxRight = this.x;
+        this.setCollisionBox();
         this.animate();
     }
 
