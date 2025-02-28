@@ -34,14 +34,16 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    opacity: 0.5; /* Hier wird die Transparenz des Hintergrundbilds angepasst */
-    z-index: -1; /* Damit es hinter dem Inhalt bleibt */
+    opacity: 0.5;
+    /* Hier wird die Transparenz des Hintergrundbilds angepasst */
+    z-index: -1;
+    /* Damit es hinter dem Inhalt bleibt */
 }
 
 
 canvas {
     background-color: black;
-    display: block; 
+    display: block;
     max-width: 720px;
 }
 
@@ -49,13 +51,14 @@ canvas {
     canvas {
         width: 100%;
     }
-    
+
     h1 {
         display: none;
     }
 
     body::before {
-        background-size: cover; /* Deckt den gesamten Bildschirm ab */
+        background-size: cover;
+        /* Deckt den gesamten Bildschirm ab */
     }
 }
 

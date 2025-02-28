@@ -107,8 +107,8 @@ class World {
         this.ctx.translate(this.camera_x, 0); // Forwards 
 
 
-        this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
 
         this.addObjectsToMap(this.level.items);
