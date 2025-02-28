@@ -19,7 +19,7 @@ class Coin extends Item {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES);
         }, 200);
     }

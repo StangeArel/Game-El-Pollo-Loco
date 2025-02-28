@@ -103,7 +103,7 @@ class Character extends MovableObject {
 
     animate() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -130,9 +130,9 @@ class Character extends MovableObject {
             }
         }, 1000 / 60);
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_DEAD);
+                this.playAnimationOnce(this.IMAGES_DEAD, stopAllIntervals);
                 this.longIdle = false;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

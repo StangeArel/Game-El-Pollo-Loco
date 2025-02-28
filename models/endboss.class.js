@@ -80,7 +80,7 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             let status = this.getStatus();
 
             if (status == 'alerting') {
@@ -138,7 +138,7 @@ class Endboss extends MovableObject {
     }
 
     moveLeftAttackRight() {
-        this.moveLeftInterval = setInterval(() => {
+        this.moveLeftInterval = setStoppableInterval(() => {
             if (this.x > this.maxLeft) {
                 this.moveLeft();
                 this.setStatus('movingLeft');
@@ -150,7 +150,7 @@ class Endboss extends MovableObject {
                 if (!this.attackTimer) {
                     this.setStatus('attacking');
                     this.attackTimer = setTimeout(() => {
-                        this.moveRightInterval = setInterval(() => {
+                        this.moveRightInterval = setStoppableInterval(() => {
                             if (this.x < this.maxRight) {
                                 this.moveRight();
                                 this.setStatus('movingRight');

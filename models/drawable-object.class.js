@@ -64,7 +64,7 @@ class DrawableObject {
         this.currentImage++;
     }
 
-    playAnimationOnce(images) {
+    playAnimationOnce(images, callback) {
         if (this.previousImages != images) {
             this.previousImages = images;
             this.currentImage = 0;
@@ -75,6 +75,8 @@ class DrawableObject {
             let path = images[i];
             this.img = this.imageCache[path];
             this.currentImage++;
+        } else if (typeof callback === 'function') {
+            callback();
         }
     }
 }

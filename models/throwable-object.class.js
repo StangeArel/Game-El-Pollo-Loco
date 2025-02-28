@@ -46,7 +46,7 @@ class ThrowableObject extends MovableObject {
         this.destroyed = true;
 
         if (!this.splashAnimation) {
-            this.splashAnimation = setInterval(() => {
+            this.splashAnimation = setStoppableInterval(() => {
                 this.playAnimation(this.IMAGES_SPLASH);
             }, 70);
 
@@ -67,11 +67,11 @@ class ThrowableObject extends MovableObject {
             this.speedX *= -1;
         }
         this.applyGravity();
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.x += this.speedX;
         }, 25);
 
-        this.rotateAnimation = setInterval(() => {
+        this.rotateAnimation = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_ROTATING);
         }, 70);
     }
