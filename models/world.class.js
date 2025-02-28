@@ -115,6 +115,11 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
+        if (this.gameOver) {
+            let gameOver = new GameOver();
+            gameOver.draw(this.ctx);
+        }
+
         let self = this;
         requestAnimationFrame(function () {
             self.draw();

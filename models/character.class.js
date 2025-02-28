@@ -132,7 +132,11 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             if (this.isDead()) {
-                this.playAnimationOnce(this.IMAGES_DEAD, stopAllIntervals);
+                let self = this;
+                this.playAnimationOnce(this.IMAGES_DEAD, function() {
+                    stopAllIntervals();
+                    self.world.gameOver = true;
+                });
                 this.longIdle = false;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
