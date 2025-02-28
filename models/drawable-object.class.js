@@ -54,6 +54,10 @@ class DrawableObject {
     }
 
     playAnimation(images) {
+        if (this.previousImages != images) {
+            this.previousImages = images;
+            this.currentImage = 0;
+        }
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
@@ -61,9 +65,16 @@ class DrawableObject {
     }
 
     playAnimationOnce(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        if (this.previousImages != images) {
+            this.previousImages = images;
+            this.currentImage = 0;
+        }
+
+        if (this.currentImage < images.length) {
+            let i = this.currentImage % images.length;
+            let path = images[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        }
     }
 }
