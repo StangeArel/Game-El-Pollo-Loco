@@ -23,3 +23,22 @@ function startGame() {
     let btnStart = document.getElementById('btnStartGame');
     btnStart.classList.toggle("d_none");
 }
+
+function pauseGame() {
+    stopAllIntervals();
+    let menuBtn = document.getElementById('btnMenu');
+    menuBtn.removeEventListener('click', pauseGame);
+    menuBtn.addEventListener('click', resumeGame);
+}
+
+function resumeGame() {
+    world.run();
+
+    world.character.animate();
+    world.character.applyGravity();
+    world.level.animateAll();
+
+    let menuBtn = document.getElementById('btnMenu');
+    menuBtn.removeEventListener('click', resumeGame);
+    menuBtn.addEventListener('click', pauseGame);
+}

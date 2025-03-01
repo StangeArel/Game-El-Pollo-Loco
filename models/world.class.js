@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level;
     canvas;
     ctx;
     keyboard;
@@ -14,6 +14,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.gameOverScreen = new GameOver();
+        this.level = getNewLevel1();
         this.draw();
         this.setWorld();
         this.run();

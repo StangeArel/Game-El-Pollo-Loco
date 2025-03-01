@@ -46,13 +46,12 @@ class ThrowableObject extends MovableObject {
         this.destroyed = true;
 
         if (!this.splashAnimation) {
+            let self = this;
             this.splashAnimation = setStoppableInterval(() => {
-                this.playAnimation(this.IMAGES_SPLASH);
+                this.playAnimationOnce(this.IMAGES_SPLASH, function() {
+                    self.deleteMe = true;
+                });
             }, 70);
-
-            setTimeout(() => {
-                this.deleteMe = true;    
-            }, 500);
         }
     }
 
