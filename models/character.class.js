@@ -6,7 +6,7 @@ class Character extends MovableObject {
 
     maxEnergy = 100;
     energy = this.maxEnergy;
-    
+
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -133,9 +133,12 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if (this.isDead()) {
                 let self = this;
-                this.playAnimationOnce(this.IMAGES_DEAD, function() {
+                this.playAnimationOnce(this.IMAGES_DEAD, function () {
                     stopAllIntervals();
                     self.world.gameOver = true;
+                    let btnStart = document.getElementById('btnStartGame');
+                    btnStart.classList.toggle("d_none");
+                    btnStart.innerHTML = "Try again!";
                 });
                 this.longIdle = false;
             } else if (this.isHurt()) {
@@ -149,7 +152,7 @@ class Character extends MovableObject {
                 this.longIdle = false;
             } else if (this.longIdle) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
-            }  else {
+            } else {
                 this.playAnimation(this.IMAGES_IDLE);
                 this.longIdle = false;
 
@@ -159,7 +162,7 @@ class Character extends MovableObject {
                         this.longIdleTimer = null;
                     }, 2000);
                 }
-            }    
+            }
         }, 70);
     }
 
@@ -195,7 +198,7 @@ class Character extends MovableObject {
     }
 
     getAvailableBottlePercentage() {
-//        console.log(this.currentAvailableBottles);
+        //        console.log(this.currentAvailableBottles);
         return Math.min(this.currentAvailableBottles / this.maxAvailableBottles * 100.0, 100)
     }
 }
