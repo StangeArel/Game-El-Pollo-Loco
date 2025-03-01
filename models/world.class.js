@@ -13,6 +13,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.gameOverScreen = new GameOver();
         this.draw();
         this.setWorld();
         this.run();
@@ -116,8 +117,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         if (this.gameOver) {
-            let gameOver = new GameOver();
-            gameOver.draw(this.ctx);
+            this.gameOverScreen.draw(this.ctx);
         }
 
         let self = this;
