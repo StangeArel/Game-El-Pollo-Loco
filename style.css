@@ -40,6 +40,33 @@ body::before {
     /* Damit es hinter dem Inhalt bleibt */
 }
 
+.menu {
+    position: absolute;
+    border: 2px solid red;
+    width: 720px;
+    height: 480px;
+}
+
+#btnStartGame {
+    cursor: pointer;
+    margin: 0;
+    font-family: 'zabras';
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-shadow: 4px 2px 8px rgba(0, 0, 0, 0.5);
+    background-color: rgb(65,145,42);
+    border: none;
+    padding: 10px 25px;
+    width: 12rem;
+    height: 3rem;
+    position: relative;
+    top: 88%;
+    left: calc(50% - 6rem);
+}
+
+.d_none {
+    display: none;
+} 
 
 canvas {
     background-color: black;
