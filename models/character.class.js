@@ -107,13 +107,11 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                /* this.walking_sound.play(); */
             }
 
             if (this.world.keyboard.LEFT) {
                 if ((this.x > 0 && !this.levelEndReached) || this.isAtLevelEndTrap()) {
                     this.moveLeft();
-                    /* this.walking_sound.play(); */
                     this.otherDirection = true;
                 }
             }
@@ -150,6 +148,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
                 this.longIdle = false;
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                sounds.play('walking');
                 this.playAnimation(this.IMAGES_WALKING);
                 this.longIdle = false;
             } else if (this.longIdle) {
@@ -165,6 +164,7 @@ class Character extends MovableObject {
                     }, 2000);
                 }
             }
+            
         }, 70);
     }
 
@@ -179,6 +179,7 @@ class Character extends MovableObject {
         }
 
         if (item instanceof Coin) {
+            sounds.play('coin');
             this.energy = Math.min(this.energy + 5, this.maxEnergy);
             this.world.statusBar.setPercentage(this.energy / this.maxEnergy * 100);
         }

@@ -10,6 +10,7 @@
     <title>El Pollo Loco</title>
 
     <script src="./interval.js"></script>
+    <script src="./models/sounds.class.js"></script>
 
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/movable-object.class.js"></script>
@@ -48,7 +49,7 @@
     </div>
     <div id="menu-overlay" class="menu-overlay d_none" onclick="resumeGame()">
         <div id="menu" class="menu" onclick="stopPropagation(event)">
-            <button onclick="">Sound on</button>
+            <button id="btnSound" onclick="toggleSounds()">Turn Off Sounds</button>
             <button onclick="resumeGame()">Continue</button>
             <button onclick="startGame()">Restart</button>
             <div class="controls">

@@ -75,6 +75,7 @@ class World {
             })
 
             if (enemy.isDead() && !enemy.deadTimer) {
+                sounds.play('chickenDying');
                 enemy.deadTimer = setTimeout(() => {
                     enemy.deleteMe = true;
                     if (this.statusBarEndboss) {

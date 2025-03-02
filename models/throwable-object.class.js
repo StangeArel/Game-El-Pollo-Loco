@@ -45,6 +45,8 @@ class ThrowableObject extends MovableObject {
         this.stop();
         this.destroyed = true;
 
+        sounds.play('bottleBreak');
+
         if (!this.splashAnimation) {
             let self = this;
             this.splashAnimation = setStoppableInterval(() => {
@@ -60,6 +62,8 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
+        sounds.play('throw');
+
         this.speedY = 20;
         this.speedX = 5;
         if (this.otherDirection) {
