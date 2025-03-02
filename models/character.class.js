@@ -137,7 +137,9 @@ class Character extends MovableObject {
                     stopAllIntervals();
                     self.world.gameOver = true;
                     let btnStart = document.getElementById('btnStartGame');
-                    btnStart.classList.toggle("d_none");
+                    btnStart.classList.remove("d_none");
+                    let btnMenu = document.getElementById('btnMenu');
+                    btnMenu.classList.add("d_none");
                     btnStart.innerHTML = "Try again!";
                 });
                 this.longIdle = false;

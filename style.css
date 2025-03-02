@@ -47,6 +47,19 @@ body::before {
     height: 480px;
 }
 
+.loading {
+    position: absolute;
+    border: 2px solid red;
+    width: 720px;
+    height: 480px;
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: yellow;
+}
+
 @keyframes pulseGlow {
     0% {
         box-shadow: 0 0 8px rgba(50, 205, 50, 0.7);
@@ -57,6 +70,73 @@ body::before {
     100% {
         box-shadow: 0 0 8px rgba(50, 205, 50, 0.7);
     }
+}
+.btnMenu {
+    cursor: pointer;
+    margin: 0;
+    font-family: 'zabras';
+    font-size: 30px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    background: linear-gradient(145deg, rgb(50, 205, 50), #1b5e20);
+    border: 2px solid rgb(76, 175, 80);
+    border-radius: 12px;
+    padding: 12px 30px;
+    width: 14rem;
+    height: 3.5rem;
+    position: relative;
+    top: 5%;
+    left: 0;
+    box-shadow: 0 0 10px rgba(50, 205, 50, 0.7);
+    transition: all 0.3s ease-in-out;
+    animation: pulseGlow 2s infinite alternate ease-in-out;
+}
+
+@keyframes shrinkToGameButton {
+    0% {
+        width: 14rem;
+        height: 3.5rem;
+        border-radius: 12px;
+        top: 5%;
+        left: 0;
+        padding: 12px 30px;
+        font-size: 30px;
+    }
+    100% {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        top: calc(100% - 2.5rem);
+        left: 0.3rem;
+        padding: 0;
+        font-size: 50%;
+    }
+}
+
+.btnMenuInGame {
+    cursor: pointer;
+    margin: 0;
+    font-family: 'zabras';
+    font-size: 50%;
+    font-weight: bolder;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    background: linear-gradient(145deg, rgb(50, 205, 50), #1b5e20);
+    border: 2px solid rgb(76, 175, 80);
+    border-radius: 12px;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    position: relative;
+    top: calc(100% - 2.5rem);
+    left: 0.3rem;
+    box-shadow: 0 0 10px rgba(50, 205, 50, 0.7);
+    animation: shrinkToGameButton 0.75s ease-in-out forwards;
 }
 
 #btnStartGame {
@@ -82,7 +162,8 @@ body::before {
     animation: pulseGlow 2s infinite alternate ease-in-out;
 }
 
-#btnStartGame:hover {
+#btnStartGame:hover,
+.btnMenu:hover {
     background: linear-gradient(145deg, #388e3c, #1b5e20);
     color: #e8ffe8;
     text-shadow: 0px 0px 8px rgba(200, 255, 200, 0.8);
@@ -91,7 +172,8 @@ body::before {
     box-shadow: 0 0 15px rgba(102, 255, 102, 0.9);
 }
 
-#btnStartGame:active {
+#btnStartGame:active,
+.btnMenu:active {
     transform: translateY(2px) scale(0.98);
     box-shadow: 0 0 5px rgba(50, 205, 50, 0.8);
     background: linear-gradient(145deg, #1b5e20, #2e7d32);

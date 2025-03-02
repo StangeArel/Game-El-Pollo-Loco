@@ -19,9 +19,23 @@ function showStartScreen() {
 }
 
 function startGame() {
+    let loading = document.getElementById('loading');
+    loading.classList.remove('d_none');
+
     world = new World(canvas, keyboard);
-    let btnStart = document.getElementById('btnStartGame');
-    btnStart.classList.toggle("d_none");
+
+    setTimeout(() => {
+        loading.classList.add('d_none');
+        let btnStart = document.getElementById('btnStartGame');
+        btnStart.classList.add("d_none");
+        let btnMenu = document.getElementById('btnMenu');
+        btnMenu.classList.remove("d_none");
+        btnMenu.classList.remove("btnMenu");
+        btnMenu.innerText = "| |";
+
+        btnMenu.classList.add("btnMenuInGame");
+    }, 1000);
+    
 }
 
 function pauseGame() {
