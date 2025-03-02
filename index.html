@@ -42,10 +42,36 @@
     <h1>El Pollo Loco</h1>
     <canvas id="canvas" width="720" height="480"></canvas>
     <div id="loading" class="loading d_none"><span>Loading...</span></div>
-    <div class="menu">
+    <div class="buttons">
         <button id="btnStartGame" onclick="startGame()">Start</button>
         <button id="btnMenu" class="btnMenu" onclick="pauseGame()">Menu</button>
     </div>
+    <div id="menu-overlay" class="menu-overlay d_none" onclick="resumeGame()">
+        <div id="menu" class="menu" onclick="stopPropagation(event)">
+            <button onclick="">Sound on</button>
+            <button onclick="resumeGame()">Continue</button>
+            <button onclick="startGame()">Restart</button>
+            <div class="controls">
+                <div class="control-item">
+                    <img src="./img/icons/arrowUp.png" alt="Jump">
+                    Jump
+                </div>
+                <div class="control-item">
+                    <img src="./img/icons/arrowRight.png" alt="Right">
+                    Go to the right
+                </div>
+                <div class="control-item">
+                    <img src="./img/icons/arrowLeft.png" alt="Left">
+                    Go to the left
+                </div>
+                <div class="control-item">
+                    <img class="spaceTaste" src="./img/icons/space.png" alt="Throw">
+                    Throw bottles
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 

@@ -22,6 +22,9 @@ function startGame() {
     let loading = document.getElementById('loading');
     loading.classList.remove('d_none');
 
+    let menuOverlay = document.getElementById('menu-overlay');
+    menuOverlay.classList.add('d_none');
+
     world = new World(canvas, keyboard);
 
     setTimeout(() => {
@@ -38,21 +41,26 @@ function startGame() {
     
 }
 
+function stopPropagation(e) {
+    e.stopPropagation();
+}
+
 function pauseGame() {
     stopAllIntervals();
-    let menuBtn = document.getElementById('btnMenu');
-    menuBtn.removeEventListener('click', pauseGame);
-    menuBtn.addEventListener('click', resumeGame);
+
+    let menuOverlay = document.getElementById('menu-overlay');
+    menuOverlay.classList.remove('d_none');
 }
 
 function resumeGame() {
-    world.run();
+    if (world) {
+        world.run();
 
-    world.character.animate();
-    world.character.applyGravity();
-    world.level.animateAll();
+        world.character.animate();
+        world.character.applyGravity();
+        world.level.animateAll();
+    }
 
-    let menuBtn = document.getElementById('btnMenu');
-    menuBtn.removeEventListener('click', resumeGame);
-    menuBtn.addEventListener('click', pauseGame);
+    let menuOverlay = document.getElementById('menu-overlay');
+    menuOverlay.classList.add('d_none');
 }
