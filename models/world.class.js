@@ -39,6 +39,7 @@ class World {
         if (this.character.isAtLevelEnd() && endboss && !this.endBossStarted) {
             this.endBossStarted = true;
             this.statusBarEndboss = new StatusBarEndboss();
+            endboss.setStatus('alerting');
 
             setTimeout(() => {endboss.moveLeftAttackRight()}, 2000);
         }
@@ -69,6 +70,11 @@ class World {
 
             if (enemy.isDead() && !enemy.deadTimer) {
                 sounds.play('chickenDying');
+
+                if (enemy instanceof Endboss) {
+                    sounds.play('endbossDying');
+                }
+
                 enemy.deadTimer = setTimeout(() => {
                     enemy.deleteMe = true;
                     if (this.statusBarEndboss) {

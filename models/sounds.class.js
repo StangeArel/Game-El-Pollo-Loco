@@ -14,7 +14,11 @@ class Sounds {
         characterDying : new Audio('./audio/characterDying.mp3'),
         characterHurt : new Audio('./audio/characterHurt.mp3'),
         jump : new Audio('./audio/jump.mp3'),
-        snoring : new Audio('./audio/snoring.mp3')
+        snoring : new Audio('./audio/snoring.mp3'),
+        endbossDying : new Audio('./audio/endbossDying.mp3'),
+        endbossAlerting : new Audio('./audio/endbossAlerting.mp3'),
+        endbossAttacking : new Audio('./audio/endbossAttacking.mp3'),
+        endbossHurt : new Audio('./audio/endbossHurt.mp3')
     }
 
     play(name, loop) {

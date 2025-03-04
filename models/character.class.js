@@ -173,7 +173,6 @@ class Character extends MovableObject {
                     }, 10000);
                 }
             }
-            console.log(this.longIdleTimer)
         }, 70);
     }
 

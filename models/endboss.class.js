@@ -10,9 +10,10 @@ class Endboss extends MovableObject {
         movingLeft : 0,
         movingRight : 0,
         attacking : 0,
-        alerting : 1,
+        alerting : 0,
         hurt : 0,
-        dead : 0
+        dead : 0,
+        waiting : 1
     }
 
     IMAGES_ALERT = [
@@ -84,10 +85,12 @@ class Endboss extends MovableObject {
             let status = this.getStatus();
 
             if (status == 'alerting') {
+                sounds.play('endbossAlerting');
                 this.playAnimation(this.IMAGES_ALERT);
             } 
             
             if (status == 'attacking') {
+                sounds.play('endbossAttacking');
                 this.playAnimation(this.IMAGES_ATTACK);
             }
             
@@ -96,6 +99,7 @@ class Endboss extends MovableObject {
             }
             
             if (status == 'hurt') {
+                sounds.play('endbossHurt');
                 this.playAnimation(this.IMAGES_HURT);
             }
             
@@ -138,6 +142,10 @@ class Endboss extends MovableObject {
     }
 
     moveLeftAttackRight() {
+        if (this.isDead()) {
+            return
+        }
+
         this.moveLeftInterval = setStoppableInterval(() => {
             if (this.x > this.maxLeft) {
                 this.moveLeft();
@@ -151,21 +159,7 @@ class Endboss extends MovableObject {
                     this.setStatus('attacking');
                     this.attackTimer = setTimeout(() => {
                         this.moveRightInterval = setStoppableInterval(() => {
-                            if (this.x < this.maxRight) {
-                                this.moveRight();
-                                this.setStatus('movingRight');
-                            }
-            
-                            if (this.isAtMaxRight()) {
-                                clearInterval(this.moveRightInterval);
-                                clearTimeout(this.attackTimer);
-                                this.attackTimer = null;
-
-                                this.setStatus('alerting');
-                                setTimeout(() => {
-                                    this.moveLeftAttackRight();
-                                }, this.getRandomTime());
-                            }
+                            this.moveRightAfterAttack();
                         }, 1000 / 60);
                     }, attackTime);
                 }
@@ -175,4 +169,21 @@ class Endboss extends MovableObject {
         }, 1000 / 60);
     }
 
+    moveRightAfterAttack() {
+        if (this.x < this.maxRight) {
+            this.moveRight();
+            this.setStatus('movingRight');
+        }
+
+        if (this.isAtMaxRight()) {
+            clearInterval(this.moveRightInterval);
+            clearTimeout(this.attackTimer);
+            this.attackTimer = null;
+
+            this.setStatus('alerting');
+            setTimeout(() => {
+                this.moveLeftAttackRight();
+            }, this.getRandomTime());
+        }
+    }
 }
