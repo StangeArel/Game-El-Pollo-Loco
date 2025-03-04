@@ -23,7 +23,6 @@ class World {
     run() {
         setStoppableInterval(() => {
             this.checkCollisions();
-            this.checkThrowObjects();
             this.checkEndboss();    
         }, 200);
     }
@@ -42,12 +41,6 @@ class World {
             this.statusBarEndboss = new StatusBarEndboss();
 
             setTimeout(() => {endboss.moveLeftAttackRight()}, 2000);
-        }
-    }
-
-    checkThrowObjects() {
-        if (this.keyboard.SPACE) {
-            this.character.throwBottle();
         }
     }
 
@@ -140,7 +133,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

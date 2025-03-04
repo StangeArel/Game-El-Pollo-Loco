@@ -9,7 +9,12 @@ class Sounds {
         coin : new Audio('./audio/coin.mp3'),
         menuSound : new Audio('./audio/menuSound.mp3'),
         throw : new Audio('./audio/throw.mp3'),
-        walking : new Audio('./audio/walking.mp3')
+        walking : new Audio('./audio/walking.mp3'),
+        collectBottle : new Audio('./audio/collectingBottles.mp3'),
+        characterDying : new Audio('./audio/characterDying.mp3'),
+        characterHurt : new Audio('./audio/characterHurt.mp3'),
+        jump : new Audio('./audio/jump.mp3'),
+        snoring : new Audio('./audio/snoring.mp3')
     }
 
     play(name, loop) {

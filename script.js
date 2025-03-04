@@ -14,7 +14,7 @@ function showStartScreen() {
     let img = new Image();
     img.src = './img/9_intro_outro_screens/start/startscreen_1.png';
 
-    img.onload = function() {
+    img.onload = function () {
         context.drawImage(img, 0, 0, canvas.width, canvas.height);
     };
 }
@@ -44,7 +44,7 @@ function startGame() {
 
         sounds.play('backgroundChicken', true);
     }, 1000);
-    
+
 }
 
 function stopPropagation(e) {

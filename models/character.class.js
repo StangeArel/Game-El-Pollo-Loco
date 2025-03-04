@@ -104,6 +104,10 @@ class Character extends MovableObject {
     animate() {
 
         setStoppableInterval(() => {
+            if (this.world.keyboard.SPACE) {
+                this.throwBottle();
+            }
+
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -131,6 +135,7 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             if (this.isDead()) {
                 let self = this;
+                sounds.play('characterDying');
                 this.playAnimationOnce(this.IMAGES_DEAD, function () {
                     stopAllIntervals();
                     self.world.gameOver = true;
@@ -141,17 +146,21 @@ class Character extends MovableObject {
                     btnStart.innerHTML = "Try again!";
                 });
                 this.longIdle = false;
+                clearInterval(this.longIdleTimer);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.longIdle = false;
+                sounds.play('characterHurt');
+                this.resetLongIdle();
             } else if (this.isAboveGround()) {
+                sounds.play('jump');
                 this.playAnimation(this.IMAGES_JUMPING);
-                this.longIdle = false;
+                this.resetLongIdle();
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 sounds.play('walking');
                 this.playAnimation(this.IMAGES_WALKING);
-                this.longIdle = false;
+                this.resetLongIdle();
             } else if (this.longIdle) {
+                sounds.play('snoring');
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
@@ -161,11 +170,17 @@ class Character extends MovableObject {
                     this.longIdleTimer = setTimeout(() => {
                         this.longIdle = true;
                         this.longIdleTimer = null;
-                    }, 2000);
+                    }, 10000);
                 }
             }
-            
+            console.log(this.longIdleTimer)
         }, 70);
+    }
+
+    resetLongIdle() {
+        this.longIdle = false;
+        clearInterval(this.longIdleTimer);
+        this.longIdleTimer = null;
     }
 
     jump() {
@@ -174,6 +189,7 @@ class Character extends MovableObject {
 
     pickUp(item) {
         if (item instanceof Bottle) {
+            sounds.play('collectBottle');
             this.currentAvailableBottles = Math.min(this.currentAvailableBottles + 1, this.maxAvailableBottles);
             this.world.statusBarSecondary.setPercentage(this.currentAvailableBottles / this.maxAvailableBottles * 100);
         }
@@ -188,8 +204,9 @@ class Character extends MovableObject {
     }
 
     throwBottle() {
-        if (this.currentAvailableBottles > 0) {
-            this.longIdle = false;
+        if (this.currentAvailableBottles > 0 && !this.throwing) {
+            this.throwing = true;
+            this.resetLongIdle();
             let bottle = new ThrowableObject(this.x + 50, this.y + 100, this.otherDirection);
             this.world.throwableObjects.push(bottle);
 
@@ -197,6 +214,10 @@ class Character extends MovableObject {
 
             let bottlePercentage = this.getAvailableBottlePercentage();
             this.world.statusBarSecondary.setPercentage(bottlePercentage);
+
+            setTimeout(() => {
+                this.throwing = false;
+            }, 500);
         }
     }
 
