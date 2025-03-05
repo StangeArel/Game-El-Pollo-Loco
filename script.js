@@ -106,3 +106,15 @@ function toggleSounds() {
         btnSound.innerText = 'Turn Off Sounds'
     }
 }
+
+window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
+    const landscape = e.matches;
+    let rotateMessage = document.getElementById('rotateMessage');
+
+    if (landscape) {
+        rotateMessage.classList.add('d_none');
+    } else {
+        pauseGame();
+        rotateMessage.classList.remove('d_none');
+    }
+});
