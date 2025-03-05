@@ -79,6 +79,14 @@ class World {
                     enemy.deleteMe = true;
                     if (this.statusBarEndboss) {
                         this.statusBarEndboss = null;
+
+                        let wonScreen = document.getElementById('won');
+                        wonScreen.classList.remove('d_none');
+                        let btnStart = document.getElementById('btnStartGame');
+                        btnStart.classList.remove("d_none");
+                        let btnMenu = document.getElementById('btnMenu');
+                        btnMenu.classList.add("d_none");
+                        btnStart.innerHTML = "Try again!";
                     }
                 }, 1500);
             }

@@ -23,6 +23,9 @@ function startGame() {
     sounds.play('menuSound');
     sounds.play('backgroundMusic', true);
 
+    let wonScreen = document.getElementById('won');
+    wonScreen.classList.add('d_none');
+
     let loading = document.getElementById('loading');
     loading.classList.remove('d_none');
 

@@ -64,6 +64,19 @@ body::before {
     color: yellow;
 }
 
+.won {
+    position: absolute;
+    width: 720px;
+    height: 480px;
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(182, 207, 182, 0.3);
+    backdrop-filter: blur(15px);    
+    color: yellow;
+}
+
 @keyframes pulseGlow {
     0% {
         box-shadow: 0 0 8px rgba(50, 205, 50, 0.7);
