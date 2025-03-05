@@ -277,6 +277,11 @@ canvas {
     max-width: 720px;
 }
 
+.impressum {
+    position: absolute;
+    bottom: 0;
+}
+
 @media only screen and (max-width: 760px) {
     canvas {
         width: 100%;
