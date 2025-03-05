@@ -109,12 +109,8 @@ function toggleSounds() {
 
 window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
     const landscape = e.matches;
-    let rotateMessage = document.getElementById('rotateMessage');
 
-    if (landscape) {
-        rotateMessage.classList.add('d_none');
-    } else {
+    if (!landscape) {
         pauseGame();
-        rotateMessage.classList.remove('d_none');
     }
 });
