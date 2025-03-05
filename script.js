@@ -59,6 +59,14 @@ function pauseGame() {
     let menuOverlay = document.getElementById('menu-overlay');
     menuOverlay.classList.remove('d_none');
 
+    let btnSound = document.getElementById('btnSound');
+
+    if (sounds.getSoundEnabled()) {    
+        btnSound.innerText = 'Turn Off Sounds';
+    } else {
+        btnSound.innerText = 'Turn On Sounds';
+    }
+
     sounds.pause('backgroundChicken');
 }
 
@@ -79,14 +87,14 @@ function resumeGame() {
 }
 
 function toggleSounds() {
-    if (sounds.soundEnabled) {
-        sounds.soundEnabled = false;
+    if (sounds.getSoundEnabled()) {
+        sounds.setSoundEnabled(false);
         sounds.pauseAll();
 
         let btnSound = document.getElementById('btnSound');
         btnSound.innerText = 'Turn On Sounds'
     } else {
-        sounds.soundEnabled = true;
+        sounds.setSoundEnabled(true);
         sounds.play('menuSound');
         sounds.play('backgroundMusic', true);
 

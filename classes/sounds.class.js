@@ -21,8 +21,23 @@ class Sounds {
         endbossHurt : new Audio('./audio/endbossHurt.mp3')
     }
 
+    setSoundEnabled(value) {
+        this.soundEnabled = value;
+        localStorage.setItem('soundEnabled', value);
+    }
+
+    getSoundEnabled() {
+        let savedSetting = JSON.parse(localStorage.getItem('soundEnabled'));
+        if (savedSetting != null) {
+            this.soundEnabled = savedSetting;
+            return savedSetting;
+        }
+
+        return this.soundEnabled;
+    }
+
     play(name, loop) {
-        if (this.soundEnabled) {
+        if (this.getSoundEnabled()) {
             this.SOUNDS[name].play();
             this.SOUNDS[name].loop = loop;
         }
