@@ -7,6 +7,8 @@ function init() {
     canvas = document.getElementById('canvas');
     sounds = new Sounds();
     showStartScreen();
+
+    new TouchEvents();
 }
 
 function showStartScreen() {
@@ -29,6 +31,9 @@ function startGame() {
     let loading = document.getElementById('loading');
     loading.classList.remove('d_none');
 
+    let mobileButtons = document.getElementById('mobileButtons');
+    mobileButtons.classList.add('d_none');
+
     let menuOverlay = document.getElementById('menu-overlay');
     menuOverlay.classList.add('d_none');
 
@@ -41,9 +46,12 @@ function startGame() {
         let btnMenu = document.getElementById('btnMenu');
         btnMenu.classList.remove("d_none");
         btnMenu.classList.remove("btnMenu");
-        btnMenu.innerText = "| |";
+        btnMenu.innerHTML = "M";
 
         btnMenu.classList.add("btnMenuInGame");
+
+        let mobileButtons = document.getElementById('mobileButtons');
+        mobileButtons.classList.remove('d_none');
 
         sounds.play('backgroundChicken', true);
     }, 1000);

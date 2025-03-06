@@ -30,6 +30,8 @@
     <script src="./classes/endboss.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./classes/gameOver.class.js"></script>
+    <script src="./classes/gameOver.class.js"></script>
+    <script src="./classes/touchEvents.class.js"></script>
     <script src="./script.js"></script>
 </head>
 
@@ -38,6 +40,17 @@
     <canvas id="canvas" width="720" height="480"></canvas>
     <div id="loading" class="loading d_none"><span>Loading...</span></div>
     <div id="won" class="won d_none"><span>You won!</span></div>
+    <div id="mobileButtons" class="mobileButtons d_none">
+        <div class="leftContainer">
+            <div id="jump" class="topLeft">JUMP</div>
+            <div id="moveLeft" class="bottomLeft">MOVE<br>LEFT</div>
+        </div>
+        <div class="rightContainer">
+            <div id="throw" class="topRight">THROW<br>BOTTLE</div>
+            <div id="moveRight" class="bottomRight">MOVE<br>RIGHT</div>
+        </div>
+    </div>
+
     <div class="buttons">
         <button id="btnMenu" class="btnMenu" onclick="pauseGame()">Menu</button>
         <button id="btnStartGame" onclick="startGame()">Start</button>
