@@ -44,13 +44,11 @@ class ThrowableObject extends MovableObject {
     destroy() {
         this.stop();
         this.destroyed = true;
-
         sounds.play('bottleBreak');
-
         if (!this.splashAnimation) {
             let self = this;
             this.splashAnimation = setStoppableInterval(() => {
-                this.playAnimationOnce(this.IMAGES_SPLASH, function() {
+                this.playAnimationOnce(this.IMAGES_SPLASH, function () {
                     self.deleteMe = true;
                 });
             }, 70);
@@ -63,7 +61,6 @@ class ThrowableObject extends MovableObject {
 
     throw() {
         sounds.play('throw');
-
         this.speedY = 20;
         this.speedX = 5;
         if (this.otherDirection) {
@@ -73,7 +70,6 @@ class ThrowableObject extends MovableObject {
         setStoppableInterval(() => {
             this.x += this.speedX;
         }, 25);
-
         this.rotateAnimation = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_ROTATING);
         }, 70);

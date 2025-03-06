@@ -1,5 +1,4 @@
 class Item extends DrawableObject {
-
     y = 350;
     IMAGES = [];
 

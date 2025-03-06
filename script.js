@@ -64,7 +64,7 @@ function pauseGame() {
 
     let btnSound = document.getElementById('btnSound');
 
-    if (sounds.getSoundEnabled()) {    
+    if (sounds.getSoundEnabled()) {
         btnSound.innerText = 'Turn Off Sounds';
     } else {
         btnSound.innerText = 'Turn On Sounds';

@@ -6,9 +6,8 @@ class Coin extends Item {
 
     height = 40;
     width = 40;
-
     y = 400;
-    
+
     constructor() {
         super();
         this.loadImage(this.getRandomImage());

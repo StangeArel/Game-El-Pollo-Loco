@@ -12,11 +12,11 @@ class Level {
         this.items = items;
     }
 
-    animateAll() {
+    animateAll() {
         this.enemies.forEach(enemy => {
             enemy.animate();
         });
-
+        
         this.items.forEach(item => {
             if (item instanceof Coin) {
                 item.animate();

@@ -6,7 +6,6 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
-
     collisionBox = {};
 
     setCollisionBox() {
@@ -14,9 +13,8 @@ class DrawableObject {
         this.collisionBox.height = this.height;
     }
 
-    // loadImage('img/test.png')
     loadImage(path) {
-        this.img = new Image();  // this.img = document.getElementById('image') <img ig="image" src>
+        this.img = new Image();
         this.img.src = path;
     }
 
@@ -29,15 +27,11 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y+(this.height-this.collisionBox.height), this.collisionBox.width, this.collisionBox.height);
+            ctx.rect(this.x, this.y + (this.height - this.collisionBox.height), this.collisionBox.width, this.collisionBox.height);
             ctx.stroke();
         }
-    } 
+    }
 
-    /**
- * 
- * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...] 
- */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -48,9 +42,9 @@ class DrawableObject {
 
     isColliding(mo) {
         return this.x + this.collisionBox.width > mo.x &&
-            this.y+(this.height-this.collisionBox.height) + this.collisionBox.height > mo.y+(mo.height-mo.collisionBox.height) &&
+            this.y + (this.height - this.collisionBox.height) + this.collisionBox.height > mo.y + (mo.height - mo.collisionBox.height) &&
             this.x < mo.x + mo.collisionBox.width &&
-            this.y+(this.height-this.collisionBox.height) < mo.y+(mo.height-mo.collisionBox.height) + mo.collisionBox.height;
+            this.y + (this.height - this.collisionBox.height) < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height;
     }
 
     playAnimation(images) {

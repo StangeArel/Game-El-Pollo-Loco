@@ -7,7 +7,7 @@ class Bottle extends Item {
 
     height = 80;
     width = 42;
-    
+
     constructor() {
         super();
         this.loadImage(this.getRandomImage());

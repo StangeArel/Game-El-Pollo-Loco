@@ -23,25 +23,22 @@ class World {
     run() {
         setStoppableInterval(() => {
             this.checkCollisions();
-            this.checkEndboss();    
+            this.checkEndboss();
         }, 200);
     }
 
     checkEndboss() {
         let endboss;
-
         this.level.enemies.forEach((enemy) => {
             if (enemy instanceof Endboss) {
                 endboss = enemy;
             }
         })
-
         if (this.character.isAtLevelEnd() && endboss && !this.endBossStarted) {
             this.endBossStarted = true;
             this.statusBarEndboss = new StatusBarEndboss();
             endboss.setStatus('alerting');
-
-            setTimeout(() => {endboss.moveLeftAttackRight()}, 2000);
+            setTimeout(() => { endboss.moveLeftAttackRight() }, 2000);
         }
     }
 
@@ -51,13 +48,11 @@ class World {
                 this.character.pickUp(item);
             }
         });
-
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy / this.character.maxEnergy * 100);
             };
-
             this.throwableObjects.forEach((bottle) => {
                 if (enemy.isColliding(bottle) && !bottle.destroyed) {
                     enemy.hit(this.statusBarEndboss);
@@ -70,16 +65,13 @@ class World {
 
             if (enemy.isDead() && !enemy.deadTimer) {
                 sounds.play('chickenDying');
-
                 if (enemy instanceof Endboss) {
                     sounds.play('endbossDying');
                 }
-
                 enemy.deadTimer = setTimeout(() => {
                     enemy.deleteMe = true;
                     if (this.statusBarEndboss) {
                         this.statusBarEndboss = null;
-
                         let wonScreen = document.getElementById('won');
                         wonScreen.classList.remove('d_none');
                         let btnStart = document.getElementById('btnStartGame');
@@ -91,7 +83,6 @@ class World {
                 }, 1500);
             }
         });
-
         this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
         this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.deleteMe);
         this.level.items = this.level.items.filter((item) => !item.deleteMe);
@@ -106,23 +97,17 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-
-        // Space for fixed object
-        this.ctx.translate(-this.camera_x, 0); // Back
+        this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarSecondary);
         if (this.statusBarEndboss) {
             this.addToMap(this.statusBarEndboss);
         }
-        this.ctx.translate(this.camera_x, 0); // Forwards 
-
-
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
-
         this.addObjectsToMap(this.level.items);
-
         this.ctx.translate(-this.camera_x, 0);
 
         if (this.gameOver) {

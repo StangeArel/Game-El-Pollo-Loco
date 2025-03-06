@@ -1,9 +1,8 @@
 class MovableObject extends DrawableObject {
-    // das alles hier NUR für bewegbare Objekte
     speed = 0.15;
     otherDirection = false;
-    speedY = 0;  // wie schnell runter fehlt
-    acceleration = 2.5;  // wie es sich beschleunigt
+    speedY = 0;
+    acceleration = 2.5;
     energy = 100;
     lastHit = 0;
 

@@ -7,13 +7,13 @@ class Endboss extends MovableObject {
     speed = 5;
 
     statuses = {
-        movingLeft : 0,
-        movingRight : 0,
-        attacking : 0,
-        alerting : 0,
-        hurt : 0,
-        dead : 0,
-        waiting : 1
+        movingLeft: 0,
+        movingRight: 0,
+        attacking: 0,
+        alerting: 0,
+        hurt: 0,
+        dead: 0,
+        waiting: 1
     }
 
     IMAGES_ALERT = [
@@ -87,22 +87,22 @@ class Endboss extends MovableObject {
             if (status == 'alerting') {
                 sounds.play('endbossAlerting');
                 this.playAnimation(this.IMAGES_ALERT);
-            } 
-            
+            }
+
             if (status == 'attacking') {
                 sounds.play('endbossAttacking');
                 this.playAnimation(this.IMAGES_ATTACK);
             }
-            
+
             if (status == 'movingLeft' || status == 'movingRight') {
                 this.playAnimation(this.IMAGES_WALKING);
             }
-            
+
             if (status == 'hurt') {
                 sounds.play('endbossHurt');
                 this.playAnimation(this.IMAGES_HURT);
             }
-            
+
             if (this.isDead() || status == 'dead') {
                 this.setStatus('dead');
                 this.playAnimation(this.IMAGES_DEAD);
@@ -119,9 +119,9 @@ class Endboss extends MovableObject {
 
     getStatus() {
         let status;
-        
+
         Object.keys(this.statuses).forEach(key => {
-            if(this.statuses[key] == 1) {
+            if (this.statuses[key] == 1) {
                 status = key;
             }
         });

@@ -1,9 +1,7 @@
 class Character extends MovableObject {
-
     height = 250;
     y = 50;
     speed = 10;
-
     maxEnergy = 100;
     energy = this.maxEnergy;
 
@@ -71,7 +69,6 @@ class Character extends MovableObject {
     ]
 
     world;
-
     maxAvailableBottles = 10;
     currentAvailableBottles = this.maxAvailableBottles;
 
@@ -102,7 +99,6 @@ class Character extends MovableObject {
     }
 
     animate() {
-
         setStoppableInterval(() => {
             if (this.world.keyboard.SPACE) {
                 this.throwBottle();
@@ -208,9 +204,7 @@ class Character extends MovableObject {
             this.resetLongIdle();
             let bottle = new ThrowableObject(this.x + 50, this.y + 100, this.otherDirection);
             this.world.throwableObjects.push(bottle);
-
             this.currentAvailableBottles = Math.max(this.currentAvailableBottles - 1, 0);
-
             let bottlePercentage = this.getAvailableBottlePercentage();
             this.world.statusBarSecondary.setPercentage(bottlePercentage);
 
@@ -221,7 +215,6 @@ class Character extends MovableObject {
     }
 
     getAvailableBottlePercentage() {
-        //        console.log(this.currentAvailableBottles);
         return Math.min(this.currentAvailableBottles / this.maxAvailableBottles * 100.0, 100)
     }
 }
