@@ -94,10 +94,6 @@ class Character extends MovableObject {
         return this.x >= this.world.level.level_end_x && this.x <= this.world.level.level_end_x + this.speed;
     }
 
-    isAtLevelEndTrap() {
-        return this.levelEndReached && this.x > this.world.level.level_end_x - 100;
-    }
-
     animate() {
         this.setKeyboardInterval();
         this.setAnimationInterval();
@@ -166,7 +162,7 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.LEFT) {
-                if ((this.x > 0 && !this.levelEndReached) || this.isAtLevelEndTrap()) {
+                if (this.x > 0) {
                     this.moveLeft();
                     this.otherDirection = true;
                 }
@@ -176,12 +172,7 @@ class Character extends MovableObject {
                 this.jump();
             }
 
-            if (this.isAtLevelEnd() || this.levelEndReached) {
-                this.levelEndReached = true;
-                this.world.camera_x = -this.world.level.level_end_x + 100;
-            } else {
-                this.world.camera_x = -this.x + 100;
-            }
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
     }
 
