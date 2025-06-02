@@ -47,6 +47,14 @@ class DrawableObject {
             this.y + (this.height - this.collisionBox.height) < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height;
     }
 
+    isCollidingTop(mo) {
+        return this.x + this.collisionBox.width > mo.x &&
+            this.y + (this.height - this.collisionBox.height) + this.collisionBox.height > mo.y + (mo.height - mo.collisionBox.height) &&
+            this.x < mo.x + mo.collisionBox.width &&
+            this.y + (this.height - this.collisionBox.height) < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height &&
+            this.y + (this.height - this.collisionBox.height) + this.collisionBox.height < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height;
+    }
+
     playAnimation(images) {
         if (this.previousImages != images) {
             this.previousImages = images;

@@ -49,7 +49,10 @@ class World {
             }
         });
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !(enemy.isDead())) {
+            if (this.character.isCollidingTop(enemy) && this.character.speedY <= 10 && this.character.isAboveGround() && !(enemy.isDead())) {
+                enemy.hit();
+                this.character.jump(10);
+            } else if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy / this.character.maxEnergy * 100);
             };
@@ -132,7 +135,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx);
+        //        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

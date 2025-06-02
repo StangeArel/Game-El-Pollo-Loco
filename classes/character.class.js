@@ -178,8 +178,8 @@ class Character extends MovableObject {
         this.longIdleTimer = null;
     }
 
-    jump() {
-        this.speedY = 30;
+    jump(adjustedSpeed) {
+        this.speedY = adjustedSpeed != undefined ? adjustedSpeed : 20;
     }
 
     pickUp(item) {
