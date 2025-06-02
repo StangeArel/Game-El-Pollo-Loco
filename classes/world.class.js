@@ -49,7 +49,7 @@ class World {
             }
         });
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingTop(enemy) && this.character.speedY <= 10 && this.character.isAboveGround() && !(enemy.isDead())) {
+            if (this.character.isCollidingTop(enemy) && this.character.speedY <= 10 && this.character.isAboveGround() && !(enemy.isDead()) && !(enemy instanceof Endboss)) {
                 enemy.hit();
                 this.character.jump(10);
             } else if (this.character.isColliding(enemy) && !(enemy.isDead())) {
@@ -73,7 +73,7 @@ class World {
                 }
                 enemy.deadTimer = setTimeout(() => {
                     enemy.deleteMe = true;
-                    if (this.statusBarEndboss) {
+                    if (enemy instanceof Endboss) {
                         this.statusBarEndboss = null;
                         let wonScreen = document.getElementById('won');
                         wonScreen.classList.remove('d_none');
