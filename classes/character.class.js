@@ -99,6 +99,62 @@ class Character extends MovableObject {
     }
 
     animate() {
+        this.setKeyboardInterval();
+        this.setAnimationInterval();
+    }
+
+    setAnimationInterval() {
+        setStoppableInterval(() => {
+            if (this.isDead()) {
+                this.deadAnimation();
+            } else if (this.isHurt()) {
+                this.playAnimationAndSound(this.IMAGES_HURT, 'characterHurt', true);
+            } else if (this.isAboveGround()) {
+                this.playAnimationAndSound(this.IMAGES_JUMPING, 'jump', true);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimationAndSound(this.IMAGES_WALKING, 'walking', true);
+            } else if (this.longIdle) {
+                this.playAnimationAndSound(this.IMAGES_LONG_IDLE, 'snoring', false);
+            } else {
+                this.playAnimation(this.IMAGES_IDLE);
+                this.longIdle = false;
+
+                if (!this.longIdleTimer) {
+                    this.longIdleTimer = setTimeout(() => {
+                        this.longIdle = true;
+                        this.longIdleTimer = null;
+                    }, 10000);
+                }
+            }
+        }, 70);
+    }
+
+    playAnimationAndSound(animation, soundName, resetLongIdle) {
+        this.playAnimation(animation);
+        sounds.play(soundName);
+
+        if (resetLongIdle) {
+            this.resetLongIdle();
+        }
+    }
+
+    deadAnimation() {
+        let self = this;
+        sounds.play('characterDying');
+        this.playAnimationOnce(this.IMAGES_DEAD, function () {
+            stopAllIntervals();
+            self.world.gameOver = true;
+            let btnStart = document.getElementById('btnStartGame');
+            btnStart.classList.remove("d_none");
+            let btnMenu = document.getElementById('btnMenu');
+            btnMenu.classList.add("d_none");
+            btnStart.innerHTML = "Try again!";
+        });
+        this.longIdle = false;
+        clearInterval(this.longIdleTimer);
+    }
+
+    setKeyboardInterval() {
         setStoppableInterval(() => {
             if (this.world.keyboard.SPACE) {
                 this.throwBottle();
@@ -127,49 +183,6 @@ class Character extends MovableObject {
                 this.world.camera_x = -this.x + 100;
             }
         }, 1000 / 60);
-
-        setStoppableInterval(() => {
-            if (this.isDead()) {
-                let self = this;
-                sounds.play('characterDying');
-                this.playAnimationOnce(this.IMAGES_DEAD, function () {
-                    stopAllIntervals();
-                    self.world.gameOver = true;
-                    let btnStart = document.getElementById('btnStartGame');
-                    btnStart.classList.remove("d_none");
-                    let btnMenu = document.getElementById('btnMenu');
-                    btnMenu.classList.add("d_none");
-                    btnStart.innerHTML = "Try again!";
-                });
-                this.longIdle = false;
-                clearInterval(this.longIdleTimer);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                sounds.play('characterHurt');
-                this.resetLongIdle();
-            } else if (this.isAboveGround()) {
-                sounds.play('jump');
-                this.playAnimation(this.IMAGES_JUMPING);
-                this.resetLongIdle();
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                sounds.play('walking');
-                this.playAnimation(this.IMAGES_WALKING);
-                this.resetLongIdle();
-            } else if (this.longIdle) {
-                sounds.play('snoring');
-                this.playAnimation(this.IMAGES_LONG_IDLE);
-            } else {
-                this.playAnimation(this.IMAGES_IDLE);
-                this.longIdle = false;
-
-                if (!this.longIdleTimer) {
-                    this.longIdleTimer = setTimeout(() => {
-                        this.longIdle = true;
-                        this.longIdleTimer = null;
-                    }, 10000);
-                }
-            }
-        }, 70);
     }
 
     resetLongIdle() {
