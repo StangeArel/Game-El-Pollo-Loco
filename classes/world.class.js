@@ -43,11 +43,22 @@ class World {
     }
 
     checkCollisions() {
+        this.checkItemCollisions();
+        this.checkEnemyCollisions();
+        this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
+        this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.deleteMe);
+        this.level.items = this.level.items.filter((item) => !item.deleteMe);
+    }
+
+    checkItemCollisions() {
         this.level.items.forEach((item) => {
             if (this.character.isColliding(item)) {
                 this.character.pickUp(item);
             }
         });
+    }
+
+    checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isCollidingTop(enemy) && this.character.speedY <= 10 && this.character.isAboveGround() && !(enemy.isDead()) && !(enemy instanceof Endboss)) {
                 enemy.hit();
@@ -64,31 +75,32 @@ class World {
                 if (!bottle.isAboveGround()) {
                     bottle.destroy();
                 }
-            })
+            });
 
-            if (enemy.isDead() && !enemy.deadTimer) {
-                sounds.play('chickenDying');
-                if (enemy instanceof Endboss) {
-                    sounds.play('endbossDying');
-                }
-                enemy.deadTimer = setTimeout(() => {
-                    enemy.deleteMe = true;
-                    if (enemy instanceof Endboss) {
-                        this.statusBarEndboss = null;
-                        let wonScreen = document.getElementById('won');
-                        wonScreen.classList.remove('d_none');
-                        let btnStart = document.getElementById('btnStartGame');
-                        btnStart.classList.remove("d_none");
-                        let btnMenu = document.getElementById('btnMenu');
-                        btnMenu.classList.add("d_none");
-                        btnStart.innerHTML = "Try again!";
-                    }
-                }, 1500);
-            }
+            this.enemyIsDying(enemy);
         });
-        this.level.enemies = this.level.enemies.filter((enemy) => !enemy.deleteMe);
-        this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.deleteMe);
-        this.level.items = this.level.items.filter((item) => !item.deleteMe);
+    }
+
+    enemyIsDying(enemy) {
+        if (enemy.isDead() && !enemy.deadTimer) {
+            sounds.play('chickenDying');
+            if (enemy instanceof Endboss) {
+                sounds.play('endbossDying');
+            }
+            enemy.deadTimer = setTimeout(() => {
+                enemy.deleteMe = true;
+                if (enemy instanceof Endboss) {
+                    this.statusBarEndboss = null;
+                    let wonScreen = document.getElementById('won');
+                    wonScreen.classList.remove('d_none');
+                    let btnStart = document.getElementById('btnStartGame');
+                    btnStart.classList.remove("d_none");
+                    let btnMenu = document.getElementById('btnMenu');
+                    btnMenu.classList.add("d_none");
+                    btnStart.innerHTML = "Try again!";
+                }
+            }, 1500);
+        }
     }
 
     setWorld() {

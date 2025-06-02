@@ -48,10 +48,7 @@ class DrawableObject {
     }
 
     isCollidingTop(mo) {
-        return this.x + this.collisionBox.width > mo.x &&
-            this.y + (this.height - this.collisionBox.height) + this.collisionBox.height > mo.y + (mo.height - mo.collisionBox.height) &&
-            this.x < mo.x + mo.collisionBox.width &&
-            this.y + (this.height - this.collisionBox.height) < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height &&
+        return this.isColliding(mo) &&
             this.y + (this.height - this.collisionBox.height) + this.collisionBox.height < mo.y + (mo.height - mo.collisionBox.height) + mo.collisionBox.height;
     }
 
