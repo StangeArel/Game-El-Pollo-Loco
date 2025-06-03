@@ -60,24 +60,28 @@ class World {
 
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isCollidingTop(enemy) && this.character.speedY <= 10 && this.character.isAboveGround() && !(enemy.isDead()) && !(enemy instanceof Endboss)) {
+            if (this.character.isCollidingTop(enemy) && this.character.speedY <= 0 && this.character.isAboveGround() && !(enemy.isDead()) && !(enemy instanceof Endboss)) {
                 enemy.hit();
                 this.character.jump(10);
             } else if (this.character.isColliding(enemy) && !(enemy.isDead())) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy / this.character.maxEnergy * 100);
             };
-            this.throwableObjects.forEach((bottle) => {
-                if (enemy.isColliding(bottle) && !bottle.destroyed) {
-                    enemy.hit(this.statusBarEndboss);
-                    bottle.destroy();
-                }
-                if (!bottle.isAboveGround()) {
-                    bottle.destroy();
-                }
-            });
+            this.checkBottleHitsEnemy(enemy);
 
             this.enemyIsDying(enemy);
+        });
+    }
+
+    checkBottleHitsEnemy(enemy) {
+        this.throwableObjects.forEach((bottle) => {
+            if (enemy.isColliding(bottle) && !bottle.destroyed) {
+                enemy.hit(this.statusBarEndboss);
+                bottle.destroy();
+            }
+            if (!bottle.isAboveGround()) {
+                bottle.destroy();
+            }
         });
     }
 
@@ -108,22 +112,9 @@ class World {
     }
 
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
-        this.addToMap(this.statusBarSecondary);
-        if (this.statusBarEndboss) {
-            this.addToMap(this.statusBarEndboss);
-        }
-        this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.items);
-        this.ctx.translate(-this.camera_x, 0);
+        this.drawEnvironment();
+        this.drawStatusBars();
+        this.drawMovables();
 
         if (this.gameOver) {
             this.gameOverScreen.draw(this.ctx);
@@ -133,6 +124,31 @@ class World {
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+    drawMovables() {
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.items);
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+    drawStatusBars() {
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarSecondary);
+        if (this.statusBarEndboss) {
+            this.addToMap(this.statusBarEndboss);
+        }
+    }
+
+    drawEnvironment() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
     }
 
     addObjectsToMap(objects) {
@@ -147,7 +163,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        //        mo.drawFrame(this.ctx);
+        //mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

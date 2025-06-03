@@ -84,30 +84,50 @@ class Endboss extends MovableObject {
         setStoppableInterval(() => {
             let status = this.getStatus();
 
-            if (status == 'alerting') {
-                sounds.play('endbossAlerting');
-                this.playAnimation(this.IMAGES_ALERT);
-            }
+            this.playAlertingAnimation(status);
 
-            if (status == 'attacking') {
-                sounds.play('endbossAttacking');
-                this.playAnimation(this.IMAGES_ATTACK);
-            }
+            this.playAttackingAnimation(status);
 
-            if (status == 'movingLeft' || status == 'movingRight') {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
+            this.playWalkingAnimation(status);
 
-            if (status == 'hurt') {
-                sounds.play('endbossHurt');
-                this.playAnimation(this.IMAGES_HURT);
-            }
+            this.playHurtAnimation(status);
 
-            if (this.isDead() || status == 'dead') {
-                this.setStatus('dead');
-                this.playAnimation(this.IMAGES_DEAD);
-            }
+            this.playDeadAnimation(status);
         }, 200);
+    }
+
+    playDeadAnimation(status) {
+        if (this.isDead() || status == 'dead') {
+            this.setStatus('dead');
+            this.playAnimation(this.IMAGES_DEAD);
+        }
+    }
+
+    playHurtAnimation(status) {
+        if (status == 'hurt') {
+            sounds.play('endbossHurt');
+            this.playAnimation(this.IMAGES_HURT);
+        }
+    }
+
+    playWalkingAnimation(status) {
+        if (status == 'movingLeft' || status == 'movingRight') {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }
+
+    playAttackingAnimation(status) {
+        if (status == 'attacking') {
+            sounds.play('endbossAttacking');
+            this.playAnimation(this.IMAGES_ATTACK);
+        }
+    }
+
+    playAlertingAnimation(status) {
+        if (status == 'alerting') {
+            sounds.play('endbossAlerting');
+            this.playAnimation(this.IMAGES_ALERT);
+        }
     }
 
     setStatus(status) {
@@ -153,20 +173,24 @@ class Endboss extends MovableObject {
             }
 
             if (this.isAtMaxLeft()) {
-                let attackTime = this.getRandomTime();
-
-                if (!this.attackTimer) {
-                    this.setStatus('attacking');
-                    this.attackTimer = setTimeout(() => {
-                        this.moveRightInterval = setStoppableInterval(() => {
-                            this.moveRightAfterAttack();
-                        }, 1000 / 60);
-                    }, attackTime);
-                }
-
-                clearInterval(this.moveLeftInterval);
+                this.attackAndMoveRight();
             }
         }, 1000 / 60);
+    }
+
+    attackAndMoveRight() {
+        let attackTime = this.getRandomTime();
+
+        if (!this.attackTimer) {
+            this.setStatus('attacking');
+            this.attackTimer = setTimeout(() => {
+                this.moveRightInterval = setStoppableInterval(() => {
+                    this.moveRightAfterAttack();
+                }, 1000 / 60);
+            }, attackTime);
+        }
+
+        clearInterval(this.moveLeftInterval);
     }
 
     moveRightAfterAttack() {
