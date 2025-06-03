@@ -26,36 +26,42 @@ function startGame() {
     sounds.play('backgroundMusic', true);
 
     let wonScreen = document.getElementById('won');
-    wonScreen.classList.add('d_none');
-
     let loading = document.getElementById('loading');
-    loading.classList.remove('d_none');
-
     let mobileButtons = document.getElementById('mobileButtons');
-    mobileButtons.classList.add('d_none');
-
     let menuOverlay = document.getElementById('menu-overlay');
-    menuOverlay.classList.add('d_none');
+    let btnStart = document.getElementById('btnStartGame');
+    let btnMenu = document.getElementById('btnMenu');
+
+    loadAndStartGame(wonScreen, loading, mobileButtons, menuOverlay, btnStart, btnMenu);
+}
+
+function loadAndStartGame(wonScreen, loading, mobileButtons, menuOverlay, btnStart, btnMenu) {
+    showOnlyLoadingScreen(wonScreen, loading, mobileButtons, menuOverlay);
 
     world = new World(canvas, keyboard);
 
     setTimeout(() => {
-        loading.classList.add('d_none');
-        let btnStart = document.getElementById('btnStartGame');
-        btnStart.classList.add("d_none");
-        let btnMenu = document.getElementById('btnMenu');
-        btnMenu.classList.remove("d_none");
-        btnMenu.classList.remove("btnMenu");
-        btnMenu.innerHTML = "M";
-
-        btnMenu.classList.add("btnMenuInGame");
-
-        let mobileButtons = document.getElementById('mobileButtons');
-        mobileButtons.classList.remove('d_none');
+        hideLoadingScreen(loading, btnStart, btnMenu, mobileButtons);
 
         sounds.play('backgroundChicken', true);
     }, 1000);
+}
 
+function hideLoadingScreen(loading, btnStart, btnMenu, mobileButtons) {
+    loading.classList.add('d_none');
+    btnStart.classList.add("d_none");
+    btnMenu.classList.remove("d_none");
+    btnMenu.classList.remove("btnMenu");
+    btnMenu.innerHTML = "M";
+    btnMenu.classList.add("btnMenuInGame");
+    mobileButtons.classList.remove('d_none');
+}
+
+function showOnlyLoadingScreen(wonScreen, loading, mobileButtons, menuOverlay) {
+    wonScreen.classList.add('d_none');
+    loading.classList.remove('d_none');
+    mobileButtons.classList.add('d_none');
+    menuOverlay.classList.add('d_none');
 }
 
 function stopPropagation(e) {
@@ -67,9 +73,19 @@ function pauseGame() {
     sounds.play('backgroundMusic', true);
     stopAllIntervals();
 
+    showMenuOverlay();
+
+    setSoundButtonText();
+
+    sounds.pause('backgroundChicken');
+}
+
+function showMenuOverlay() {
     let menuOverlay = document.getElementById('menu-overlay');
     menuOverlay.classList.remove('d_none');
+}
 
+function setSoundButtonText() {
     let btnSound = document.getElementById('btnSound');
 
     if (sounds.getSoundEnabled()) {
@@ -77,8 +93,6 @@ function pauseGame() {
     } else {
         btnSound.innerText = 'Turn On Sounds';
     }
-
-    sounds.pause('backgroundChicken');
 }
 
 function resumeGame() {
@@ -101,18 +115,12 @@ function toggleSounds() {
     if (sounds.getSoundEnabled()) {
         sounds.setSoundEnabled(false);
         sounds.pauseAll();
-
-        let btnSound = document.getElementById('btnSound');
-        btnSound.innerText = 'Turn On Sounds'
     } else {
         sounds.setSoundEnabled(true);
         sounds.play('menuSound');
         sounds.play('backgroundMusic', true);
-
-
-        let btnSound = document.getElementById('btnSound');
-        btnSound.innerText = 'Turn Off Sounds'
     }
+    setSoundButtonText();
 }
 
 window.matchMedia("(orientation: landscape)").addEventListener("change", e => {

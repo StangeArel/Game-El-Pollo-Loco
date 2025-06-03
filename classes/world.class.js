@@ -94,17 +94,21 @@ class World {
             enemy.deadTimer = setTimeout(() => {
                 enemy.deleteMe = true;
                 if (enemy instanceof Endboss) {
-                    this.statusBarEndboss = null;
-                    let wonScreen = document.getElementById('won');
-                    wonScreen.classList.remove('d_none');
-                    let btnStart = document.getElementById('btnStartGame');
-                    btnStart.classList.remove("d_none");
-                    let btnMenu = document.getElementById('btnMenu');
-                    btnMenu.classList.add("d_none");
-                    btnStart.innerHTML = "Try again!";
+                    this.youWon();
                 }
             }, 1500);
         }
+    }
+
+    youWon() {
+        this.statusBarEndboss = null;
+        let wonScreen = document.getElementById('won');
+        wonScreen.classList.remove('d_none');
+        let btnStart = document.getElementById('btnStartGame');
+        btnStart.classList.remove("d_none");
+        let btnMenu = document.getElementById('btnMenu');
+        btnMenu.classList.add("d_none");
+        btnStart.innerHTML = "Try again!";
     }
 
     setWorld() {

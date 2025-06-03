@@ -7,47 +7,46 @@ class KeyBoard {
 }
 
 document.addEventListener("keydown", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = true;
+    switch (e.keyCode) {
+        case 39:
+            keyboard.RIGHT = true;
+            break;
+        case 37:
+            keyboard.LEFT = true;
+            break;
+        case 38:
+            keyboard.UP = true;
+            break;
+        case 40:
+            keyboard.DOWN = true;
+            break;
+        case 32:
+            keyboard.SPACE = true;
+            break;
+        default:
+            break;
     }
-
-    if (e.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-
-    if (e.keyCode == 38) {
-        keyboard.UP = true;
-    }
-
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-
-    if (e.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    //    console.log(e);
 });
 
 
 document.addEventListener("keyup", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-
-    if (e.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-
-    if (e.keyCode == 38) {
-        keyboard.UP = false;
-    }
-
-    if (e.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-
-    if (e.keyCode == 32) {
-        keyboard.SPACE = false;
+    switch (e.keyCode) {
+        case 39:
+            keyboard.RIGHT = false;
+            break;
+        case 37:
+            keyboard.LEFT = false;
+            break;
+        case 38:
+            keyboard.UP = false;
+            break;
+        case 40:
+            keyboard.DOWN = false;
+            break;
+        case 32:
+            keyboard.SPACE = false;
+            break;
+        default:
+            break;
     }
 });
