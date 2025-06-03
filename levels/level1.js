@@ -1,15 +1,22 @@
+/**
+ * Creates a new level instance with predefined enemies, clouds, background objects, and items.
+ * 
+ * @returns {Level} A new level object.
+ */
 function getNewLevel1() {
     return new Level(
         generateEnemies(7, 5, 1),
-
         [new Cloud()],
-
         getBackgroundObjects(),
-
         generateItems(9, 11)
-    )
+    );
 }
 
+/**
+ * Generates an array of background objects arranged in layers for parallax scrolling.
+ * 
+ * @returns {BackgroundObject[]} Array of background objects with positions and layer images.
+ */
 function getBackgroundObjects() {
     let backgroundObjects = [];
     for (let i = -1; i <= 3; i++) {
@@ -23,6 +30,14 @@ function getBackgroundObjects() {
     return backgroundObjects;
 }
 
+/**
+ * Generates an array of enemies including normal chickens, small chickens, and endbosses.
+ * 
+ * @param {number} normal - Number of normal chicken enemies to generate.
+ * @param {number} small - Number of small chicken enemies to generate.
+ * @param {number} endboss - Number of endboss enemies to generate.
+ * @returns {(Chicken|ChickenSmall|Endboss)[]} Array of enemy objects.
+ */
 function generateEnemies(normal, small, endboss) {
     let enemiesArray = [];
     for (let i = 0; i < normal; i++)
@@ -34,6 +49,13 @@ function generateEnemies(normal, small, endboss) {
     return enemiesArray;
 }
 
+/**
+ * Generates an array of collectible items including bottles and coins.
+ * 
+ * @param {number} bottles - Number of bottle items to generate.
+ * @param {number} coins - Number of coin items to generate.
+ * @returns {(Bottle|Coin)[]} Array of item objects.
+ */
 function generateItems(bottles, coins) {
     let itemsArray = [];
     for (let i = 0; i < bottles; i++)

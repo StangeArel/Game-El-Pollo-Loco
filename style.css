@@ -27,6 +27,7 @@ h1 {
     position: absolute;
     top: 0;
     color: #fff;
+    padding-top: 100px;
 }
 
 body::before {
@@ -350,6 +351,8 @@ canvas {
 .impressum {
     position: absolute;
     bottom: 0;
+    padding-bottom: 50px !important;
+
 }
 
 .mobileButtons {

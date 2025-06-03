@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="de" translate="no">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="google" content="notranslate">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png" sizes="48x48" type="image/png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="google" content="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="green" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="icon"
+      href="./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png"
+      sizes="48x48"
+      type="image/png"
+    />
     <title>El Pollo Loco</title>
     <script src="./interval.js"></script>
     <script src="./classes/sounds.class.js"></script>
@@ -32,58 +37,65 @@
     <script src="./classes/gameOver.class.js"></script>
     <script src="./classes/touchEvents.class.js"></script>
     <script src="./script.js"></script>
-</head>
+  </head>
 
-<body onload="init()">
+  <body onload="init()">
     <h1>El Pollo Loco</h1>
     <canvas id="canvas" width="720" height="480"></canvas>
     <div id="loading" class="loading d_none"><span>Loading...</span></div>
     <div id="won" class="won d_none"><span>You won!</span></div>
     <div id="mobileButtons" class="mobileButtons d_none">
-        <div class="leftContainer">
-            <div id="jump" class="topLeft">JUMP</div>
-            <div id="moveLeft" class="bottomLeft">MOVE<br>LEFT</div>
-        </div>
-        <div class="rightContainer">
-            <div id="throw" class="topRight">THROW<br>BOTTLE</div>
-            <div id="moveRight" class="bottomRight">MOVE<br>RIGHT</div>
-        </div>
+      <div class="leftContainer">
+        <div id="jump" class="topLeft">JUMP</div>
+        <div id="moveLeft" class="bottomLeft">MOVE<br />LEFT</div>
+      </div>
+      <div class="rightContainer">
+        <div id="throw" class="topRight">THROW<br />BOTTLE</div>
+        <div id="moveRight" class="bottomRight">MOVE<br />RIGHT</div>
+      </div>
     </div>
 
     <div class="buttons">
-        <button id="btnMenu" class="btnMenu" onclick="pauseGame()">Menu</button>
-        <button id="btnStartGame" onclick="startGame()">Start</button>
+      <button id="btnMenu" class="btnMenu" onclick="pauseGame()">Menu</button>
+      <button id="btnStartGame" onclick="startGame()">Start</button>
     </div>
     <div id="menu-overlay" class="menu-overlay d_none" onclick="resumeGame()">
-        <div id="menu" class="menu" onclick="stopPropagation(event)">
-            <button id="btnSound" onclick="toggleSounds()">Turn Off Sounds</button>
-            <button onclick="resumeGame()">Continue</button>
-            <button onclick="startGame()">Restart</button>
-            <div class="controls">
-                <div class="control-item">
-                    <img src="./img/icons/arrowUp.png" alt="Jump">
-                    Jump
-                </div>
-                <div class="control-item">
-                    <img src="./img/icons/arrowRight.png" alt="Right">
-                    Go to the right
-                </div>
-                <div class="control-item">
-                    <img src="./img/icons/arrowLeft.png" alt="Left">
-                    Go to the left
-                </div>
-                <div class="control-item">
-                    <img class="spaceTaste" src="./img/icons/space.png" alt="Throw">
-                    Throw bottles
-                </div>
-            </div>
+      <div id="menu" class="menu" onclick="stopPropagation(event)">
+        <button id="btnSound" onclick="toggleSounds()">Turn Off Sounds</button>
+        <button onclick="resumeGame()">Continue</button>
+        <button onclick="startGame()">Restart</button>
+        <div class="controls">
+          <div class="control-item">
+            <img src="./img/icons/arrowUp.png" alt="Jump" />
+            Jump
+          </div>
+          <div class="control-item">
+            <img src="./img/icons/arrowRight.png" alt="Right" />
+            Go to the right
+          </div>
+          <div class="control-item">
+            <img src="./img/icons/arrowLeft.png" alt="Left" />
+            Go to the left
+          </div>
+          <div class="control-item">
+            <img class="spaceTaste" src="./img/icons/space.png" alt="Throw" />
+            Throw bottles
+          </div>
         </div>
+      </div>
     </div>
-    <div id="rotateMessage" class="rotateMessage" onclick="stopPropagation(event)">
-        <span>You can only play in landscape mode.<br>Please rotate your phone.</span>
+    <div
+      id="rotateMessage"
+      class="rotateMessage"
+      onclick="stopPropagation(event)"
+    >
+      <span
+        >You can only play in landscape mode.<br />Please rotate your
+        phone.</span
+      >
     </div>
     <div class="impressum">
-        <a href="./impressum.html">Impressum</a>
+      <a href="./impressum.html">Impressum</a>
     </div>
-</body>
+  </body>
 </html>

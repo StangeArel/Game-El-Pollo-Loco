@@ -1,14 +1,24 @@
+/**
+ * Handles touch events for mobile control buttons
+ * (move left/right, jump, and throw actions).
+ * 
+ * Updates the global `keyboard` object accordingly.
+ */
 class TouchEvents {
+    /**
+     * Initializes all mobile button touch event listeners.
+     */
     constructor() {
         this.registerMoveRightButtonEvents();
-
         this.registerMoveLeftButtonEvents();
-
         this.registerJumpButtonEvents();
-
         this.registerThrowButtonEvents();
     }
 
+    /**
+     * Registers touch events for the throw button.
+     * Sets or unsets `keyboard.SPACE`.
+     */
     registerThrowButtonEvents() {
         let throwButton = document.getElementById('throw');
 
@@ -23,6 +33,10 @@ class TouchEvents {
         });
     }
 
+    /**
+     * Registers touch events for the jump button.
+     * Sets or unsets `keyboard.UP`.
+     */
     registerJumpButtonEvents() {
         let jumpButton = document.getElementById('jump');
 
@@ -37,6 +51,10 @@ class TouchEvents {
         });
     }
 
+    /**
+     * Registers touch events for the move left button.
+     * Sets or unsets `keyboard.LEFT`.
+     */
     registerMoveLeftButtonEvents() {
         let moveLeftButton = document.getElementById('moveLeft');
 
@@ -51,6 +69,10 @@ class TouchEvents {
         });
     }
 
+    /**
+     * Registers touch events for the move right button.
+     * Sets or unsets `keyboard.RIGHT`.
+     */
     registerMoveRightButtonEvents() {
         let moveRightButton = document.getElementById('moveRight');
 
