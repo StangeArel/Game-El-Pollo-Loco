@@ -10,6 +10,8 @@ let keyboard = new KeyBoard();
 /** @type {Sounds} */
 let sounds;
 
+let showingStartScreen;
+
 /**
  * Initializes the game by setting up the canvas, sounds, and touch events.
  */
@@ -25,6 +27,7 @@ function init() {
  * Displays the start screen by drawing an image on the canvas.
  */
 function showStartScreen() {
+    showingStartScreen = true;
     let context = canvas.getContext('2d');
     let img = new Image();
     img.src = './img/9_intro_outro_screens/start/startscreen_1.png';
@@ -38,6 +41,7 @@ function showStartScreen() {
  * Starts the game by playing sounds and calling the function to load and start the game.
  */
 function startGame() {
+    showingStartScreen = false;
     sounds.play('menuSound');
     sounds.play('backgroundMusic', true);
 
@@ -182,7 +186,7 @@ function toggleSounds() {
 // Listen for screen orientation changes and pause game if in portrait mode
 window.matchMedia("(orientation: landscape)").addEventListener("change", e => {
     const landscape = e.matches;
-    if (!landscape) {
+    if (!landscape && !showingStartScreen) {
         pauseGame();
     }
 });
